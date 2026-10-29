@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سما كافيه | SAMA CAFE - قهوة مختصة، منيو إلكتروني، محمصة ومخبوزات طازجة</title>
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="description" content="سما كافيه للقهوة المختصة (SAMA Specialty Coffee) في الرياض. تصفح المنيو الإلكتروني واطلب قهوتك المختصة، V60، آيس سبانيش لاتيه، ماتشا، الحلى والمخبوزات الطازجة، وبوكسات الجمعات مع استلام من الفرع أو السيارة وتوصيل سريع.">
+    <meta name="keywords" content="سما كافيه, كوفي شوب مختص, منيو كوفي, قهوة مختصة, V60, سبانيش لاتيه, ماتشا, بوكسات قهوة, محمصة قهوة, محاصيل قهوة, كوفي الرياض, SAMA Cafe">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="سما كافيه | قهوة مختصة، منيو إلكتروني، ومخبوزات طازجة">
+    <meta property="og:description" content="اطلب الآن من منيو سما كافيه: قهوة مختصة ساخنة وباردة، تقطير V60، حلى ومخبوزات، وبوكسات جمعات (محلي، استلام من السيارة، أو توصيل سريع).">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="سما كافيه | SAMA Specialty Coffee">
+    <meta property="og:locale" content="ar_SA">
+
+    <!-- Schema.org Structured Data (JSON-LD) for Coffee Shop -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CafeOrCoffeeShop",
+      "name": "سما كافيه | SAMA Specialty Coffee",
+      "description": "كوفي شوب مختص ومحمصة قهوة في الرياض يقدم أجود محاصيل القهوة المقطرة والإسبريسو والمخبوزات الطازجة وبوكسات الجمعات.",
+      "telephone": "+966535671116",
+      "servesCuisine": ["Specialty Coffee", "Espresso", "Bakery", "Desserts"],
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "الرياض",
+        "addressCountry": "SA"
+      }
+    }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css?v=15">
+
+    <!-- Apple Pay Official JS SDK -->
+    <script src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"></script>
+
+    <!-- Moyasar Payment Form Library -->
+    <link rel="stylesheet" href="libs/moyasar.css" />
+    <script src="libs/moyasar.umd.min.js"></script>
+
+    <!-- Tap Payments goSell Library -->
+    <link rel="stylesheet" href="https://goSellJSLib.b-cdn.net/v2.0.4/css/gosell.css" />
+    <script type="text/javascript" src="https://goSellJSLib.b-cdn.net/v2.0.4/js/gosell.js"></script>
+
+    <style>
+        .currency-icon { height: 16px !important; width: auto !important; vertical-align: -2px !important; margin-right: 3px !important; margin-left: 3px !important; display: inline-block !important; opacity: 0.9; }
+        /* Hard enforcement on product & category images so they never stretch */
+        .product-img-wrapper { height: 215px !important; padding-top: 0 !important; position: relative !important; overflow: hidden !important; border-radius: 16px 16px 0 0 !important; background: #EAF4FA !important; }
+        .product-img-wrapper img, .product-img { position: static !important; width: 100% !important; height: 215px !important; object-fit: cover !important; display: block !important; }
+        /* Sleek Top Visual Category Circles */
+        .top-visual-cats { display: flex; gap: 18px; justify-content: center; align-items: center; overflow-x: auto; padding: 14px 10px 6px 10px; scrollbar-width: none; flex-wrap: wrap; }
+        .top-visual-cats::-webkit-scrollbar { display: none; }
+        .top-cat-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; transition: all 0.25s ease; min-width: 92px; }
+        .top-cat-item:hover { transform: translateY(-4px); }
+        .top-cat-thumb { width: 84px; height: 84px; border-radius: 50%; overflow: hidden; border: 2.5px solid rgba(41, 151, 216, 0.25); padding: 3px; background: #fff; box-shadow: 0 6px 18px rgba(15, 41, 66, 0.06); transition: all 0.25s ease; }
+        .top-cat-item:hover .top-cat-thumb, .top-cat-item.active .top-cat-thumb { border-color: var(--primary); box-shadow: 0 8px 22px rgba(41, 151, 216, 0.25); }
+        .top-cat-thumb img { width: 100% !important; height: 100% !important; object-fit: cover !important; border-radius: 50%; display: block; }
+        .top-cat-item span { font-size: 0.85rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; }
+        .top-cat-item.active span { color: var(--primary); font-weight: 800; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Minimalist Boutique Header (بدون شريط علوي مزعج) -->
+    <header id="header" style="background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(41, 151, 216, 0.12);">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; height: 78px; gap: 16px;">
+            <!-- Logo (Right side in RTL) -->
+            <a href="#" class="logo" onclick="navigateTo('home'); filterElectronicMenu('all')" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="assets/logo.svg" alt="SAMA Logo" id="logo-img" style="display: block; height: 50px; width: auto;">
+            </a>
+
+            <!-- Quick Clean Boutique Links (Center) -->
+            <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+                <a href="#electronic-menu" onclick="navigateTo('home'); filterElectronicMenu('all')" style="text-decoration:none; color:var(--text-dark); font-weight:700; font-size:0.92rem;">المنيو</a>
+                <a href="#contact" onclick="navigateTo('home'); scrollToSection('contact')" style="text-decoration:none; color:var(--text-muted); font-weight:600; font-size:0.9rem; display:inline-flex; align-items:center; gap:5px;">
+                    <i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> موقعنا (Google Maps)
+                </a>
+                <a href="https://wa.me/966535671116" target="_blank" style="text-decoration:none; color:var(--text-muted); font-weight:600; font-size:0.9rem; display:inline-flex; align-items:center; gap:5px;">
+                    <i class="fa-brands fa-whatsapp" style="color:#25D366; font-size:1.05rem;"></i> واتساب
+                </a>
+            </div>
+
+            <!-- Actions (Left side in RTL) -->
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 10px;">
+                <a href="admin.html" class="user-action-btn" title="لوحة التحكم والكاشير" style="color: var(--primary); font-size: 1.05rem; background: rgba(41,151,216,0.08); width: 38px; height: 38px; border-radius: 50%; text-decoration: none;">
+                    <i class="fa-solid fa-sliders"></i>
+                </a>
+                <button class="customer-nav-btn" id="customer-nav-btn" onclick="handleCustomerNavClick()" title="حسابي وطلباتي" style="background: rgba(41,151,216,0.08); border: 1px solid rgba(41,151,216,0.2);">
+                    <i class="fa-regular fa-user" id="customer-nav-icon"></i>
+                    <span id="customer-nav-label">حسابي</span>
+                </button>
+                <button class="cart-icon-btn" onclick="toggleCart(true)" aria-label="سلة الطلبات" style="background: var(--primary); color: #fff; width: 42px; height: 42px; border-radius: 50%;">
+                    <i class="fa-solid fa-mug-hot" style="font-size: 1.05rem;"></i>
+                    <span class="cart-badge" id="cart-badge-count" style="background: #0F2942; color: #fff; top: -4px; right: -4px;">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN VIEWS -->
+    <main>
+
+        <!-- VIEW 1: HOME & ELECTRONIC MENU (تصميم رايق وهادي ومختصر) -->
+        <div id="home-view" class="view-panel active">
+
+            <!-- Top Boutique Welcome & Visual Categories (الأقسام المصورة فوق بشكل راقي وملموم) -->
+            <section class="container" style="padding-top: 24px; padding-bottom: 10px; text-align: center;">
+                <div style="margin-bottom: 14px;">
+                    <h1 style="font-size: 1.55rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px;">سما للقهوة المختصة | SAMA</h1>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">قهوة مختصة تُحضّر بشغف • اختر قسمك المفضل أو اطلب مباشرة</p>
+                </div>
+
+                <!-- Visual Story Categories (الصور الدائرية الأنيقة فوق) -->
+                <div class="top-visual-cats" id="top-visual-cats">
+                    <div class="top-cat-item active" data-cat="all" onclick="filterElectronicMenu('all')">
+                        <div class="top-cat-thumb">
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=300&q=80" alt="كل المنيو">
+                        </div>
+                        <span>كل المنيو</span>
+                    </div>
+                    <div class="top-cat-item" data-cat="hot" onclick="filterElectronicMenu('hot')">
+                        <div class="top-cat-thumb">
+                            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=300&q=80" alt="القهوة الساخنة">
+                        </div>
+                        <span>القهوة الساخنة</span>
+                    </div>
+                    <div class="top-cat-item" data-cat="cold" onclick="filterElectronicMenu('cold')">
+                        <div class="top-cat-thumb">
+                            <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=300&q=80" alt="القهوة الباردة">
+                        </div>
+                        <span>القهوة الباردة</span>
+                    </div>
+                    <div class="top-cat-item" data-cat="drip" onclick="filterElectronicMenu('drip')">
+                        <div class="top-cat-thumb">
+                            <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=300&q=80" alt="المقطرة V60">
+                        </div>
+                        <span>المقطرة V60</span>
+                    </div>
+                    <div class="top-cat-item" data-cat="mojito" onclick="filterElectronicMenu('mojito')">
+                        <div class="top-cat-thumb">
+                            <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=300&q=80" alt="ماتشا وموهيتو">
+                        </div>
+                        <span>ماتشا وموهيتو</span>
+                    </div>
+                    <div class="top-cat-item" data-cat="desserts" onclick="filterElectronicMenu('desserts')">
+                        <div class="top-cat-thumb">
+                            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=300&q=80" alt="الحلى والمخبوزات">
+                        </div>
+                        <span>الحلى والمخبوزات</span>
+                    </div>
+                    <div class="top-cat-item" data-cat="boxes" onclick="filterElectronicMenu('boxes')">
+                        <div class="top-cat-thumb">
+                            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=300&q=80" alt="بوكسات الجمعات">
+                        </div>
+                        <span>بوكسات الجمعات</span>
+                    </div>
+                    <div class="top-cat-item" data-cat="beans" onclick="filterElectronicMenu('beans')">
+                        <div class="top-cat-thumb">
+                            <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=300&q=80" alt="محاصيل القهوة">
+                        </div>
+                        <span>محاصيل القهوة</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compact Order Mode Bar (شريط مختصر وراقي لطريقة الاستلام) -->
+            <div class="container" style="margin-top: 8px; margin-bottom: 18px;">
+                <div class="order-mode-bar" style="margin: 0 auto; max-width: 720px; padding: 10px; border-radius: 16px; box-shadow: 0 6px 20px rgba(15,41,66,0.04);">
+                    <div class="order-mode-tabs">
+                        <button type="button" class="order-mode-tab active" id="mode-btn-pickup" onclick="selectGlobalOrderMode('pickup')" style="padding: 9px 12px; font-size: 0.86rem;">
+                            <i class="fa-solid fa-car-side"></i>
+                            <span>استلام فرع / سيارة</span>
+                        </button>
+                        <button type="button" class="order-mode-tab" id="mode-btn-dinein" onclick="selectGlobalOrderMode('dinein')" style="padding: 9px 12px; font-size: 0.86rem;">
+                            <i class="fa-solid fa-mug-saucer"></i>
+                            <span>محلي (للطاولة)</span>
+                        </button>
+                        <button type="button" class="order-mode-tab" id="mode-btn-delivery" onclick="selectGlobalOrderMode('delivery')" style="padding: 9px 12px; font-size: 0.86rem;">
+                            <i class="fa-solid fa-motorcycle"></i>
+                            <span>توصيل للموقع</span>
+                        </button>
+                    </div>
+                    <div class="order-mode-subbar" id="order-mode-info-bar" style="padding: 6px 12px; font-size: 0.8rem;">
+                        <span id="order-mode-status-text"><i class="fa-solid fa-circle-check" style="color:#10b981; margin-left:4px;"></i> استلام سريع من الفرع أو السيارة</span>
+                        <input type="text" id="quick-table-or-car" placeholder="رقم الطاولة أو نوع/لوحة السيارة (اختياري)" oninput="syncQuickTableOrCar(this.value)" style="padding:5px 10px; border:1px solid var(--glass-border); border-radius:8px; font-size:0.78rem; width:220px; background:#fff;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. INTERACTIVE ELECTRONIC MENU SECTION -->
+            <section id="electronic-menu" class="section container" style="scroll-margin-top: 85px; padding-top: 6px; padding-bottom: 40px;">
+                <!-- Instant Search Bar -->
+                <div style="max-width: 460px; margin: 0 auto 24px auto; position: relative;">
+                    <input type="text" id="menu-search-input" oninput="handleMenuSearch(this.value)" placeholder="ابحث عن مشروبك أو الحلى (مثال: سبانيش، V60، ماتشا، كرواسون...)" style="width: 100%; padding: 11px 42px 11px 16px; border: 1px solid var(--glass-border); border-radius: 25px; background: #fff; font-size: 0.9rem; color: var(--text-dark); box-shadow: 0 3px 12px rgba(15,41,66,0.03); outline: none;">
+                    <i class="fa-solid fa-magnifying-glass" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--primary); font-size: 0.95rem;"></i>
+                </div>
+
+                <!-- Hidden pill container for JS compatibility -->
+                <div class="electronic-menu-nav" id="electronic-menu-pills" style="display:none;"></div>
+
+                <!-- Electronic Menu Products Grid -->
+                <div class="products-grid" id="home-products-grid">
+                    <!-- Dynamically populated by app.js -->
+                </div>
+            </section>
+
+            <!-- 2. Customer Reviews Section (مختصر ورايق) -->
+            <section class="section container" style="padding: 30px 20px;">
+                <div class="section-header-boutique" style="margin-bottom: 24px;">
+                    <h2 style="font-size: 1.5rem;">آراء أصدقاء سما ☕</h2>
+                </div>
+                <div class="products-grid" id="reviews-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px;"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-secondary" onclick="openReviewModal()" style="border-radius: 25px; padding: 9px 22px; font-size: 0.88rem;"><i class="fa-regular fa-star"></i> شاركنا رأيك</button>
+                </div>
+            </section>
+
+            <!-- 3. Location (Google Maps) & Contact Section -->
+            <section id="contact" class="section container contact-section" style="scroll-margin-top: 90px; padding: 30px 20px 50px 20px;">
+                <div class="section-header-boutique" style="margin-bottom: 25px;">
+                    <h2 style="font-size: 1.55rem;">موقع سما كافيه وتواصل معنا 📍</h2>
+                    <p style="font-size: 0.92rem;">تفضل بزيارتنا في الفرع أو افتح الموقع مباشرة عبر خرائط قوقل (Google Maps)</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: stretch;">
+                    <!-- Google Map Interactive Card -->
+                    <div class="checkout-card" style="padding: 18px; background: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 14px;">
+                        <div style="border-radius: 12px; overflow: hidden; height: 220px; border: 1px solid var(--glass-border);">
+                            <iframe id="cafe-google-map-iframe" src="https://www.google.com/maps?q=24.8116,46.6128&hl=ar&z=15&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <div>
+                                <h4 style="color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 2px;"><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> الرياض - حي الملقا، طريق أنس بن مالك</h4>
+                                <span style="color: var(--text-muted); font-size: 0.82rem;">يومياً: 6:30 صباحاً – 1:00 بعد منتصف الليل</span>
+                            </div>
+                            <a id="cafe-google-map-btn" href="https://maps.google.com/?q=24.8116,46.6128" target="_blank" class="btn" style="padding: 9px 18px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-map-location-dot"></i> فتح في Google Maps
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp & Direct Payment / Order Support Card -->
+                    <div class="checkout-card" style="padding: 28px 24px; background: #fff; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(37,211,102,0.1); color: #25D366; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <h3 style="color: var(--text-dark); font-weight: 800; font-size: 1.2rem;">خدمة العملاء وتنسيق البوكسات</h3>
+                        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px;">للطلب السريع أو الاستفسار أو طلب رابط دفع مباشر وتجهيز بوكسات الجمعات والشركات.</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                            <a href="https://wa.me/966535671116" target="_blank" class="btn" style="background: #25D366; border-color: #25D366; padding: 11px 26px; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: white; border-radius: 30px; font-size: 0.9rem; text-decoration: none;">
+                                <i class="fa-brands fa-whatsapp" style="font-size: 1.15rem;"></i> محادثة واتساب
+                            </a>
+                            <a id="direct-paylink-contact-btn" href="https://paylink.sa" target="_blank" class="btn btn-secondary" style="padding: 11px 22px; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; border-radius: 30px; font-size: 0.88rem; text-decoration: none; margin: 0;">
+                                <i class="fa-solid fa-link"></i> رابط الدفع السريع
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW 1.5: STANDALONE CATEGORY VIEW -->
+        <div id="store-view" class="view-panel">
+            <section id="store" class="section container store-section" style="scroll-margin-top: 100px; padding-top: 110px;">
+                <div class="section-header-boutique" style="text-align: center; margin-bottom: 30px;">
+                    <h2 id="store-view-title">منيو سما كافيه</h2>
+                    <p id="store-view-desc" style="color: var(--text-muted); font-size: 1.05rem;">اختر مشروبك المفضل وخصص الحجم والإضافات</p>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="products-grid"></div>
+
+                <!-- Back to Home Button -->
+                <div style="text-align: center; margin-top: 50px;">
+                    <button class="btn btn-secondary" onclick="navigateTo('home')" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 30px; font-weight: 600;">
+                        <i class="fa-solid fa-arrow-right"></i> العودة للمنيو الرئيسي
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW 2: CHECKOUT PAGE (إتمام الطلب واستقبال الطلبات) -->
+        <div id="checkout-view" class="view-panel">
+            <section class="section" style="padding-top: 110px;">
+                <div class="container">
+                    <div class="section-header" style="margin-bottom: 30px;">
+                        <h2 class="section-title">إتمام وتأكيد الطلب ☕</h2>
+                        <p class="section-subtitle">اختر طريقة استلام طلبك (محلي للطاولة، استلام من الفرع/السيارة، أو توصيل) وأكمل الدفع</p>
+                    </div>
+
+                    <div class="checkout-container">
+                        <!-- Left Side: Order Reception & Payment Details -->
+                        <div class="checkout-card">
+                            <div class="checkout-title">
+                                <i class="fa-solid fa-mug-hot"></i>
+                                <h3>بيانات العميل وطريقة الاستلام</h3>
+                            </div>
+
+                            <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)">
+                                <div class="form-group">
+                                    <label class="form-label" for="cust-name">الاسم الكريم *</label>
+                                    <input type="text" id="cust-name" class="form-control" placeholder="عبدالله محمد" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="cust-phone">رقم الجوال *</label>
+                                        <input type="tel" id="cust-phone" class="form-control" placeholder="05xxxxxxxx" pattern="05[0-9]{8}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="cust-email">البريد الإلكتروني (لإرسال الفاتورة PDF)</label>
+                                        <input type="email" id="cust-email" class="form-control" placeholder="example@email.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="cust-city">المدينة *</label>
+                                        <input type="text" id="cust-city" class="form-control" value="الرياض" placeholder="الرياض" required>
+                                    </div>
+                                </div>
+
+                                <!-- Order Reception Mode Selection -->
+                                <div class="form-group" style="margin-top: 15px;">
+                                    <label class="form-label" style="font-weight: 700;"><i class="fa-solid fa-bell-concierge"></i> طريقة استلام الطلب *</label>
+                                    <div class="delivery-methods" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 8px;">
+                                        <!-- Option 1: Pickup / Curbside Car -->
+                                        <label class="delivery-method-label" id="label-ship-pickup" style="border: 2px solid var(--primary); padding: 12px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; background: rgba(41, 151, 216, 0.06); transition: all 0.2s;">
+                                            <input type="radio" name="shipping_type" id="ship-pickup" value="pickup" checked onchange="updateShippingMethod('pickup')" style="cursor: pointer; width: 16px; height: 16px; accent-color: var(--primary);">
+                                            <div>
+                                                <div style="font-weight: bold; color: var(--text-dark); font-size: 0.88rem;"><i class="fa-solid fa-car-side" style="color:var(--primary);"></i> استلام فرع / سيارة</div>
+                                                <div style="font-size: 0.78rem; color: #10b981; font-weight:700;">مجاناً (5-10 دقائق)</div>
+                                            </div>
+                                        </label>
+
+                                        <!-- Option 2: Dine-in Table -->
+                                        <label class="delivery-method-label" id="label-ship-dinein" style="border: 1px solid rgba(41, 151, 216, 0.2); padding: 12px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; background: #fff; transition: all 0.2s;">
+                                            <input type="radio" name="shipping_type" id="ship-dinein" value="dinein" onchange="updateShippingMethod('dinein')" style="cursor: pointer; width: 16px; height: 16px; accent-color: var(--primary);">
+                                            <div>
+                                                <div style="font-weight: bold; color: var(--text-dark); font-size: 0.88rem;"><i class="fa-solid fa-utensils" style="color:var(--primary);"></i> محلي (للطاولة)</div>
+                                                <div style="font-size: 0.78rem; color: #10b981; font-weight:700;">مجاناً (تقديم للطاولة)</div>
+                                            </div>
+                                        </label>
+
+                                        <!-- Option 3: Delivery -->
+                                        <label class="delivery-method-label" id="label-ship-delivery" style="border: 1px solid rgba(41, 151, 216, 0.2); padding: 12px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; background: #fff; transition: all 0.2s;">
+                                            <input type="radio" name="shipping_type" id="ship-delivery" value="delivery" onchange="updateShippingMethod('delivery')" style="cursor: pointer; width: 16px; height: 16px; accent-color: var(--primary);">
+                                            <div>
+                                                <div style="font-weight: bold; color: var(--text-dark); font-size: 0.88rem;"><i class="fa-solid fa-motorcycle" style="color:var(--primary);"></i> توصيل للموقع</div>
+                                                <div style="font-size: 0.78rem; color: var(--text-gold);" id="checkout-delivery-fee-label">15.00 <img src='assets/sar.png' class='currency-icon' alt='SAR'></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Dynamic Sub-field for Table / Car / Delivery Address -->
+                                <div class="form-group" id="table-or-car-group" style="margin-top: 12px;">
+                                    <label class="form-label" id="table-or-car-label" for="cust-table-car">تفاصيل الاستلام (نوع ولون السيارة / رقم اللوحة - أو استلام من الكاونتر) *</label>
+                                    <input type="text" id="cust-table-car" class="form-control" placeholder="مثال: كامري أبيض لوحة 1234 (أو اكتب: استلام من الكاونتر)" value="استلام من الكاونتر - فرع الملقا">
+                                </div>
+
+                                <div class="form-group" id="address-form-group" style="display: none;">
+                                    <label class="form-label" for="cust-address">عنوان التوصيل بالتفصيل *</label>
+                                    <div style="display: flex; gap: 8px;">
+                                        <input type="text" id="cust-address" class="form-control" placeholder="الحي، اسم الشارع، رقم المبنى أو الموقع" style="flex: 1;">
+                                        <button type="button" onclick="getCurrentLocation()" class="btn" style="background: var(--primary); color: white; padding: 0 16px; border-radius: 8px; border: none; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.85rem; white-space: nowrap;" title="تحديد موقعي الحالي">
+                                            <i class="fa-solid fa-location-crosshairs" id="gps-icon"></i>
+                                            <span id="gps-text">تحديد موقعي</span>
+                                        </button>
+                                    </div>
+                                    <div id="gps-status" style="font-size: 0.75rem; color: #25D366; margin-top: 4px; display: none; align-items: center; gap: 4px; font-weight: bold;">
+                                        <i class="fa-solid fa-circle-check"></i> تم التقاط موقعك الجغرافي وربطه برابط خرائط جوجل بنجاح!
+                                    </div>
+                                </div>
+
+                                <div class="checkout-title" style="margin-top: 30px;">
+                                    <i class="fa-solid fa-credit-card"></i>
+                                    <h3>طريقة الدفع</h3>
+                                </div>
+
+                                <!-- Payment Selector -->
+                                <div class="payment-methods" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(125px, 1fr)); gap: 10px; margin-bottom: 22px;">
+                                    <div class="payment-method-card active" onclick="selectPaymentMethod('card')" style="text-align: center; cursor: pointer; padding: 12px 6px; border-radius: 10px; border: 1.5px solid var(--primary); background: rgba(41,151,216,0.06); transition: all 0.2s;">
+                                        <input type="radio" name="payment_type" id="pay-card" value="card" checked style="display: none;">
+                                        <i class="fa-solid fa-credit-card" style="font-size: 1.25rem; display: block; margin-bottom: 5px; color: var(--text-gold);"></i>
+                                        <span style="font-size: 0.82rem; font-weight: bold; color: var(--text-dark);">مدى / فيزا</span>
+                                    </div>
+                                    <div class="payment-method-card" onclick="selectPaymentMethod('applepay')" style="text-align: center; cursor: pointer; padding: 12px 6px; border-radius: 10px; border: 1px solid rgba(41,151,216,0.2); background: #fff; transition: all 0.2s;">
+                                        <input type="radio" name="payment_type" id="pay-applepay" value="applepay" style="display: none;">
+                                        <i class="fa-brands fa-apple" style="font-size: 1.4rem; display: block; margin-bottom: 4px; color: #000;"></i>
+                                        <span style="font-size: 0.82rem; font-weight: bold; color: var(--text-dark);">Apple Pay</span>
+                                    </div>
+                                    <div class="payment-method-card" onclick="selectPaymentMethod('paylink')" style="text-align: center; cursor: pointer; padding: 12px 6px; border-radius: 10px; border: 1px solid rgba(41,151,216,0.2); background: #fff; transition: all 0.2s;">
+                                        <input type="radio" name="payment_type" id="pay-paylink" value="paylink" style="display: none;">
+                                        <i class="fa-solid fa-link" style="font-size: 1.25rem; display: block; margin-bottom: 5px; color: #6366f1;"></i>
+                                        <span style="font-size: 0.82rem; font-weight: bold; color: var(--text-dark);">رابط دفع / STC Pay</span>
+                                    </div>
+                                    <div class="payment-method-card" onclick="selectPaymentMethod('pos')" style="text-align: center; cursor: pointer; padding: 12px 6px; border-radius: 10px; border: 1px solid rgba(41,151,216,0.2); background: #fff; transition: all 0.2s;">
+                                        <input type="radio" name="payment_type" id="pay-pos" value="pos" style="display: none;">
+                                        <i class="fa-solid fa-cash-register" style="font-size: 1.25rem; display: block; margin-bottom: 5px; color: #10b981;"></i>
+                                        <span style="font-size: 0.82rem; font-weight: bold; color: var(--text-dark);">عند الاستلام / الكاشير</span>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 16px; background: rgba(41,151,216,0.04); border: 1px dashed rgba(41,151,216,0.3); border-radius: 12px; text-align: center; margin-bottom: 20px;">
+                                    <div style="font-size: 1.5rem; color: var(--text-gold); margin-bottom: 4px;"><i class="fa-solid fa-shield-halved"></i></div>
+                                    <h4 style="color: var(--text-dark); font-size: 0.92rem; margin-bottom: 4px;">طلب فوري مرتبط بشاشة الباريستا والكاشير</h4>
+                                    <p id="checkout-gateway-notice" style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0;">بمجرد تأكيد الطلب، يصل تنبيه صوتي فوري مع تفاصيل الأحجام والإضافات إلى شاشة الكاشير والباريستا للبدء بتحضير قهوتك.</p>
+                                </div>
+
+                                <button type="submit" id="pay-submit-btn" class="btn" style="width: 100%; margin-top: 10px; font-size: 1.08rem; padding: 16px; font-weight: 800;">
+                                    <i class="fa-solid fa-mug-hot"></i> إتمام الطلب والدفع الآن
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Right Side: Order Summary -->
+                        <div class="checkout-card" style="height: fit-content;">
+                            <div class="checkout-title">
+                                <i class="fa-solid fa-receipt"></i>
+                                <h3>ملخص الطلب والمشروبات</h3>
+                            </div>
+
+                            <div id="checkout-summary-items"></div>
+
+                            <!-- Coupon code block -->
+                            <div style="margin: 15px 0 10px 0; display: flex; gap: 8px;">
+                                <input type="text" id="coupon-code" class="form-control" placeholder="كود الخصم (جرب: SAMA10)" style="border: 1px solid var(--glass-border); padding: 8px 12px; border-radius: 8px; flex: 1; font-size: 0.88rem; text-transform: uppercase; margin: 0; background: #fff; color: var(--text-dark);">
+                                <button type="button" class="btn" onclick="applyCoupon()" style="padding: 8px 15px; font-size: 0.88rem; font-weight: bold; margin: 0;">تطبيق</button>
+                            </div>
+                            <div id="coupon-message" style="font-size: 0.8rem; display: none; margin-bottom: 12px; font-weight: bold;"></div>
+
+                            <table class="summary-table">
+                                <tr class="summary-row">
+                                    <td class="summary-cell name-cell">المجموع الفرعي</td>
+                                    <td class="summary-cell price-cell" id="checkout-subtotal">0.00 <img src='assets/sar.png' class='currency-icon' alt='SAR'></td>
+                                </tr>
+                                <tr class="summary-row" id="coupon-discount-row" style="display: none;">
+                                    <td class="summary-cell name-cell" style="color: #10b981;">خصم الكوبون</td>
+                                    <td class="summary-cell price-cell" style="color: #10b981;" id="checkout-discount">-0.00 <img src='assets/sar.png' class='currency-icon' alt='SAR'></td>
+                                </tr>
+                                <tr class="summary-row">
+                                    <td class="summary-cell name-cell">رسوم التوصيل / الخدمة</td>
+                                    <td class="summary-cell price-cell" id="checkout-shipping">مجاناً</td>
+                                </tr>
+                                <tr class="summary-row total-row">
+                                    <td class="summary-cell name-cell">الإجمالي الشامل للضريبة (15%)</td>
+                                    <td class="summary-cell price-cell" id="checkout-total">0.00 <img src='assets/sar.png' class='currency-icon' alt='SAR'></td>
+                                </tr>
+                            </table>
+
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;" onclick="navigateTo('home')">
+                                <i class="fa-solid fa-arrow-right"></i> إضافة مشروبات أخرى (العودة للمنيو)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW 3: ORDER SUCCESS & INVOICE VIEW -->
+        <div id="success-view" class="view-panel">
+            <section class="section" style="padding-top: 110px;">
+                <div class="container">
+                    <div class="success-screen checkout-card">
+                        <div class="success-icon-wrapper">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <h2 class="success-title">تم استلام طلبك لدى الباريستا بنجاح! ☕✨</h2>
+                        <p class="success-message">جاري تحضير مشروباتك الآن بكل حب وإتقان. يمكنك عرض وتحميل الفاتورة الضريبية أدناه.</p>
+
+                        <div class="order-receipt-card">
+                            <h3 style="color: var(--text-gold); margin-bottom: 20px; border-bottom: 1px solid rgba(41,151,216,0.15); padding-bottom: 8px;">ملخص فاتورة الطلب</h3>
+                            <div class="receipt-line">
+                                <span class="receipt-label">رقم الطلب:</span>
+                                <span class="receipt-value" id="receipt-order-id">#SAMA-10001</span>
+                            </div>
+                            <div class="receipt-line">
+                                <span class="receipt-label">نوع الطلب:</span>
+                                <span class="receipt-value" id="receipt-order-type" style="color:var(--primary); font-weight:800;">استلام من الفرع / السيارة</span>
+                            </div>
+                            <div class="receipt-line">
+                                <span class="receipt-label">الاسم:</span>
+                                <span class="receipt-value" id="receipt-name">عبدالله</span>
+                            </div>
+                            <div class="receipt-line">
+                                <span class="receipt-label">رقم الجوال:</span>
+                                <span class="receipt-value" id="receipt-phone">0500000000</span>
+                            </div>
+                            <div class="receipt-line">
+                                <span class="receipt-label">التفاصيل / العنوان:</span>
+                                <span class="receipt-value" id="receipt-address">الرياض</span>
+                            </div>
+                            <div class="receipt-line">
+                                <span class="receipt-label">طريقة الدفع:</span>
+                                <span class="receipt-value" id="receipt-payment">مدفوع إلكترونياً</span>
+                            </div>
+                            <div class="receipt-line total-line">
+                                <span class="receipt-label">الإجمالي الشامل للضريبة:</span>
+                                <span class="receipt-value" id="receipt-total">0.00 <img src='assets/sar.png' class='currency-icon' alt='SAR'></span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                            <a href="https://paylink.sa" id="receipt-paylink-btn" target="_blank" class="btn" style="background: #6366f1; border-color: #6366f1; color: #fff; display: none; align-items: center; gap: 8px; text-decoration: none;">
+                                <i class="fa-solid fa-link"></i> فتح رابط الدفع المباشر
+                            </a>
+                            <button type="button" id="success-print-btn" class="btn" style="background: var(--espresso-dark); border-color: var(--espresso-dark); color: #7DD3FC;">
+                                <i class="fa-solid fa-file-invoice"></i> عرض وطباعة الفاتورة الضريبية (PDF)
+                            </button>
+                            <a href="#" id="whatsapp-confirm-btn" target="_blank" class="btn" style="background-color: #25D366; border-color: #25D366; color: white; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                                <i class="fa-brands fa-whatsapp"></i> إرسال إشعار واتساب للكافيه
+                            </a>
+                            <a href="https://maps.google.com/?q=24.8116,46.6128" id="receipt-map-btn" target="_blank" class="btn btn-secondary" style="margin:0; display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+                                <i class="fa-solid fa-location-dot"></i> موقع الكافيه (Google Maps)
+                            </a>
+                            <button type="button" onclick="navigateTo('home')" class="btn btn-secondary" style="margin:0;">العودة للمنيو</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- MOYASAR PAYMENT MODAL -->
+        <div class="moyasar-modal-overlay" id="moyasar-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+            <div class="moyasar-modal-content" style="background: #fff; width: 92%; max-width: 460px; padding: 25px; border-radius: 16px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.25); transform: scale(0.9); transition: transform 0.3s ease; text-align: center; max-height: 90vh; overflow-y: auto;">
+                <button type="button" onclick="closeMoyasarModal()" class="close-btn" style="position: absolute; top: 15px; left: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+                <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.15rem;">
+                    <i class="fa-solid fa-shield-halved" style="color: var(--text-gold);"></i> الدفع الإلكتروني الآمن - سما كافيه
+                </h3>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">الرجاء إدخال بيانات البطاقة أو اختيار Apple Pay لإكمال طلبك.</div>
+                <div class="mysr-form"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SIDE ELEMENT: SHOPPING CART DRAWER (سلة الطلبات) -->
+    <div class="cart-drawer-overlay" id="cart-overlay" onclick="toggleCart(false)"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3 class="cart-title">
+                <i class="fa-solid fa-mug-hot" style="color: var(--text-gold);"></i>
+                سلة مشروباتك وطلبك
+            </h3>
+            <button class="cart-close" onclick="toggleCart(false)" aria-label="إغلاق">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="cart-items" id="cart-items-container"></div>
+
+        <div class="cart-footer">
+            <div class="cart-summary-line">
+                <span class="cart-summary-label">المجموع الإجمالي:</span>
+                <span class="cart-summary-value" id="cart-total-value">0.00 <img src='assets/sar.png' class='currency-icon' alt='SAR'></span>
+            </div>
+            <button class="btn cart-checkout-btn" id="cart-checkout-button" onclick="goToCheckout()">
+                <i class="fa-solid fa-check-double"></i> متابعة لإتمام الطلب
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER Section -->
+    <footer id="footer" style="background: #0C2238; color: #e6d7c3;">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: #7DD3FC;">
+                    <i class="fa-solid fa-mug-hot"></i> سما كافيه | SAMA
+                </h3>
+                <p style="color: #c2b2a3;">كوفي شوب مختص ومحمصة قهوة نقدم أجود محاصيل البن المختص المقطرة ومشروبات الإسبريسو الساخنة والباردة والمخبوزات الطازجة يومياً.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3 style="color: #7DD3FC;">أقسام المنيو السريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#electronic-menu" onclick="navigateTo('home'); filterElectronicMenu('hot'); scrollToSection('electronic-menu')" style="color:#d8c8b8;"><i class="fa-solid fa-mug-hot" style="color: var(--primary); margin-left: 8px;"></i> القهوة الساخنة</a></li>
+                    <li><a href="#electronic-menu" onclick="navigateTo('home'); filterElectronicMenu('cold'); scrollToSection('electronic-menu')" style="color:#d8c8b8;"><i class="fa-solid fa-glass-water" style="color: var(--primary); margin-left: 8px;"></i> القهوة الباردة</a></li>
+                    <li><a href="#electronic-menu" onclick="navigateTo('home'); filterElectronicMenu('drip'); scrollToSection('electronic-menu')" style="color:#d8c8b8;"><i class="fa-solid fa-filter" style="color: var(--primary); margin-left: 8px;"></i> القهوة المقطرة V60</a></li>
+                    <li><a href="#electronic-menu" onclick="navigateTo('home'); filterElectronicMenu('desserts'); scrollToSection('electronic-menu')" style="color:#d8c8b8;"><i class="fa-solid fa-croissant" style="color: var(--primary); margin-left: 8px;"></i> الحلى والمخبوزات</a></li>
+                    <li><a href="admin.html" style="color:#7DD3FC; font-weight:700;"><i class="fa-solid fa-gauge-high" style="color: var(--primary); margin-left: 8px;"></i> لوحة تحكم الإدارة والكاشير</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 style="color: #7DD3FC;">تواصل معنا</h3>
+                <div class="footer-contact" style="color:#d8c8b8;">
+                    <div class="contact-item">
+                        <i class="fa-brands fa-whatsapp" style="color:var(--primary);"></i>
+                        <a href="https://wa.me/966535671116" target="_blank" style="color: inherit; text-decoration: none;">+966 53 567 1116</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-regular fa-envelope" style="color:var(--primary);"></i>
+                        <a href="mailto:hello@samacafe.sa" style="color: inherit; text-decoration: none;">hello@samacafe.sa</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot" style="color:var(--primary);"></i>
+                        <span>الرياض - حي الملقا، طريق أنس بن مالك</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3 style="color: #7DD3FC;">تابعنا على</h3>
+                <div style="display: flex; gap: 15px; margin-top: 15px;">
+                    <a href="#" style="color: #7DD3FC; font-size: 1.5rem;"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" style="color: #7DD3FC; font-size: 1.5rem;"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" style="color: #7DD3FC; font-size: 1.5rem;"><i class="fa-brands fa-snapchat"></i></a>
+                    <a href="#" style="color: #7DD3FC; font-size: 1.5rem;"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom" style="border-top: 1px solid rgba(125,211,252,0.15);">
+            <div class="copyright" style="color: #a89888;">
+                صنع بإتقان لـ سما كافيه للقهوة المختصة | 2026 &copy; جميع الحقوق محفوظة
+            </div>
+            <div class="payment-badges">
+                <span style="font-size: 0.8rem; color: #a89888; margin-left: 10px;">طرق الدفع المدعومة:</span>
+                <span class="payment-badge" style="font-weight: 800; font-size: 0.9rem; color: #7DD3FC; border: 1px solid rgba(125,211,252,0.3); padding: 2px 6px; border-radius: 4px;">mada</span>
+                <span class="payment-badge" style="font-weight: 800; font-size: 0.9rem; color: #7DD3FC; border: 1px solid rgba(125,211,252,0.3); padding: 2px 6px; border-radius: 4px;"><i class="fa-brands fa-cc-visa"></i></span>
+                <span class="payment-badge" style="font-weight: 800; font-size: 0.9rem; color: #7DD3FC; border: 1px solid rgba(125,211,252,0.3); padding: 2px 6px; border-radius: 4px;"><i class="fa-brands fa-cc-mastercard"></i></span>
+                <span class="payment-badge" style="font-weight: 800; font-size: 0.9rem; color: #7DD3FC; border: 1px solid rgba(125,211,252,0.3); padding: 2px 6px; border-radius: 4px;"><i class="fa-brands fa-apple-pay"></i></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PRODUCT DETAILS & CUSTOMIZATION MODAL (خيارات الأحجام والحليب والإضافات) -->
+    <div class="modal-overlay" id="product-modal" onclick="closeProductModal()"></div>
+    <div class="product-modal" id="product-modal-content" style="max-width: 860px; max-height: 92vh; overflow-y: auto;">
+        <button class="modal-close" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-body-split">
+            <div class="modal-img-col" style="padding: 20px; flex-direction: column;">
+                <div class="modal-main-img-container" style="position: relative; overflow: hidden; border-radius: 16px; background: rgba(41, 151, 216, 0.04); border: 1px solid rgba(41, 151, 216, 0.15); width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;">
+                    <img id="modal-product-img" src="" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px;">
+                </div>
+                <div id="modal-thumbnails-container" style="display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; justify-content: center; padding-bottom: 5px;"></div>
+                <div id="modal-meta-badges" style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 12px;"></div>
+            </div>
+
+            <div class="modal-info-col" style="padding: 28px; max-height: 88vh; overflow-y: auto;">
+                <div>
+                    <span class="modal-product-cat" id="modal-product-cat">القهوة المختصة</span>
+                    <h2 class="modal-product-name" id="modal-product-name" style="font-size: 1.5rem; margin-bottom: 8px;">اسم المشروب</h2>
+                    <p class="modal-product-desc" id="modal-product-desc" style="margin-bottom: 14px; font-size: 0.9rem;">تفاصيل المشروب والإيحاءات...</p>
+
+                    <div class="modal-product-price" id="modal-product-price" style="font-size: 1.45rem; margin-bottom: 16px; padding-bottom: 12px;">
+                        0.00 <span><img src='assets/sar.png' class='currency-icon' alt='SAR'></span>
+                    </div>
+
+                    <!-- CUSTOMIZATION FIELDS: SIZES, MILK, SUGAR, ADD-ONS -->
+                    <div class="modal-customizations" style="gap: 14px;">
+
+                        <!-- 1. Size / Option Selector -->
+                        <div class="form-group" id="modal-sizes-container" style="margin-bottom: 0;">
+                            <label class="form-label" style="font-weight: 800; color: var(--text-dark); font-size: 0.9rem;">
+                                <i class="fa-solid fa-mug-saucer" style="color: var(--primary);"></i> اختر الحجم / الخيار *
+                            </label>
+                            <div class="size-options-grid" id="modal-size-cards"></div>
+                        </div>
+
+                        <!-- 2. Milk Option Selector (Shown for milk drinks) -->
+                        <div class="form-group" id="modal-milk-container" style="margin-bottom: 0;">
+                            <label class="form-label" style="font-weight: 800; color: var(--text-dark); font-size: 0.9rem;">
+                                <i class="fa-solid fa-droplet" style="color: var(--primary);"></i> نوع الحليب المفضل
+                            </label>
+                            <div class="custom-pills-row" id="modal-milk-pills"></div>
+                        </div>
+
+                        <!-- 3. Sweetness / Sugar Level (Shown for drinks) -->
+                        <div class="form-group" id="modal-sugar-container" style="margin-bottom: 0;">
+                            <label class="form-label" style="font-weight: 800; color: var(--text-dark); font-size: 0.9rem;">
+                                <i class="fa-solid fa-cubes-stacked" style="color: var(--primary);"></i> مستوى السكر / التحلية
+                            </label>
+                            <div class="custom-pills-row" id="modal-sugar-pills"></div>
+                        </div>
+
+                        <!-- 4. Extra Add-ons (Multi-select checkboxes) -->
+                        <div class="form-group" id="modal-addons-container" style="margin-bottom: 0;">
+                            <label class="form-label" style="font-weight: 800; color: var(--text-dark); font-size: 0.9rem;">
+                                <i class="fa-solid fa-circle-plus" style="color: var(--primary);"></i> إضافات خاصة (اختياري)
+                            </label>
+                            <div class="addons-grid" id="modal-addons-grid"></div>
+                        </div>
+
+                        <!-- 5. Custom Barista Note -->
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label" for="modal-custom-note" style="font-weight: 800; color: var(--text-dark); font-size: 0.88rem;">
+                                <i class="fa-regular fa-comment-dots" style="color: var(--primary);"></i> ملاحظات للباريستا (أو كتابة اسم على الكوب)
+                            </label>
+                            <input type="text" id="modal-custom-note" class="form-control" style="border: 1px solid var(--glass-border); padding: 9px 12px; border-radius: 10px; font-size: 0.86rem;" placeholder="مثال: ثلج قليل، قهوة ساخنة جداً، كتابة اسم سارة على الكوب...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="modal-action-row" style="margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(41,151,216,0.12);">
+                    <div class="quantity-counter">
+                        <button onclick="adjustModalQty(-1)" type="button"><i class="fa-solid fa-minus"></i></button>
+                        <span id="modal-qty">1</span>
+                        <button onclick="adjustModalQty(1)" type="button"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <button class="btn modal-add-btn" id="modal-add-btn" onclick="addModalProductToCart()" type="button">
+                        إضافة إلى الطلب <i class="fa-solid fa-mug-hot"></i>
+                    </button>
+                    <button class="btn-icon" onclick="shareProduct(currentModalProduct ? currentModalProduct.id : null)" type="button" title="مشاركة المشروب" style="width: 46px; height: 46px; border-radius: 12px; border: 1px solid rgba(41, 151, 216, 0.35); background: rgba(41, 151, 216, 0.08); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; cursor: pointer;">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLE PAY iOS SHEET OVERLAY -->
+    <div id="apple-pay-sheet-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; display: none; align-items: flex-end; justify-content: center; transition: opacity 0.3s ease;">
+        <div id="apple-pay-sheet" style="background: #111; color: #fff; width: 100%; max-width: 480px; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; box-sizing: border-box; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.1, 0.76, 0.55, 0.94); direction: ltr;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 12px; margin-bottom: 12px;">
+                <span style="font-weight: bold; font-size: 1.15rem; display: flex; align-items: center; gap: 6px; color: #fff;">
+                    <i class="fa-brands fa-apple" style="font-size: 1.4rem;"></i> Pay
+                </span>
+                <button type="button" onclick="closeApplePaySimulation()" style="background: #222; border: none; color: #fff; width: 28px; height: 28px; border-radius: 50%; font-size: 0.9rem; cursor: pointer;">✕</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; padding: 12px 0; border-bottom: 1px solid #222;">
+                <span style="color: #888; text-transform: uppercase;">Merchant</span>
+                <span style="font-weight: 600; color: #fff;">SAMA SPECIALTY COFFEE</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; padding: 12px 0; border-bottom: 1px solid #222;">
+                <span style="color: #888; text-transform: uppercase;">Order Type</span>
+                <span id="ap-shipping-address" style="font-weight: 500; color: #fff;">Pickup / Dine-in</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; padding: 12px 0; border-bottom: 1px solid #222;">
+                <span style="color: #888; text-transform: uppercase;">Contact</span>
+                <span id="ap-contact" style="font-weight: 500; color: #fff;">05xxxxxxxx</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.15rem; padding: 15px 0; font-weight: bold; border-bottom: 1px solid #222; margin-bottom: 25px;">
+                <span style="color: #888; text-transform: uppercase;">Pay SAMA</span>
+                <span id="ap-total-price" style="color: #fff; font-size: 1.35rem;">0.00 SAR</span>
+            </div>
+            <div id="ap-biometric-section" onclick="startApplePayBiometric()" style="text-align: center; margin-bottom: 20px; padding: 10px 0; cursor: pointer;">
+                <div id="ap-fingerprint-icon" style="font-size: 3.5rem; color: #007aff; margin-bottom: 15px; position: relative; height: 70px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-face-id" id="ap-sensor-icon" style="transition: all 0.3s ease;"></i>
+                </div>
+                <div id="ap-status-text" style="font-size: 0.95rem; color: #888; font-weight: 500;">Click sensor to confirm with Face ID</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="product-modal-overlay" id="review-modal" onclick="closeReviewModal()">
+        <div class="product-modal-content" id="review-modal-content" onclick="event.stopPropagation()" style="max-width: 450px; padding: 30px;">
+            <button class="modal-close" onclick="closeReviewModal()">&times;</button>
+            <h3 style="color: var(--text-dark); font-weight: 700; margin-bottom: 20px; font-size: 1.35rem; text-align: center;"><i class="fa-solid fa-mug-hot" style="color:var(--primary);"></i> قيّم تجربتك في سما كافيه</h3>
+            <form id="store-review-form" onsubmit="submitStoreReview(event)">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" for="review-author-name" style="font-weight: bold; color: var(--text-dark); font-size: 0.9rem;">الاسم الكريم *</label>
+                    <input type="text" id="review-author-name" class="form-control" style="border: 1px solid var(--glass-border); padding: 8px 12px; border-radius: 8px; width: 100%; background: #fff; color: var(--text-dark);" required placeholder="مثال: فهد العتيبي">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" style="font-weight: bold; color: var(--text-dark); display: block; font-size: 0.9rem;">التقييم بالنجوم *</label>
+                    <div class="star-rating-selector" style="display: flex; gap: 8px; font-size: 1.6rem; color: #ccc; cursor: pointer; direction: ltr; justify-content: center; margin: 10px 0;">
+                        <i class="fa-solid fa-star" onclick="setReviewStars(1)" data-star="1"></i>
+                        <i class="fa-solid fa-star" onclick="setReviewStars(2)" data-star="2"></i>
+                        <i class="fa-solid fa-star" onclick="setReviewStars(3)" data-star="3"></i>
+                        <i class="fa-solid fa-star" onclick="setReviewStars(4)" data-star="4"></i>
+                        <i class="fa-solid fa-star" onclick="setReviewStars(5)" data-star="5"></i>
+                    </div>
+                    <input type="hidden" id="review-stars-val" value="5">
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label class="form-label" for="review-author-text" style="font-weight: bold; color: var(--text-dark); font-size: 0.9rem;">رأيك في القهوة والخدمة *</label>
+                    <textarea id="review-author-text" class="form-control" style="border: 1px solid var(--glass-border); padding: 8px 12px; border-radius: 8px; width: 100%; height: 90px; resize: none; background: #fff; color: var(--text-dark);" required placeholder="شاركنا رأيك في قهوتنا المختصة ومخبوزاتنا..."></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; padding: 12px; font-weight: bold;">إرسال التقييم <i class="fa-regular fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Promo Code Reward Modal -->
+    <div class="product-modal-overlay" id="promo-reward-modal" onclick="closePromoRewardModal()">
+        <div class="product-modal-content" id="promo-reward-modal-content" onclick="event.stopPropagation()" style="text-align: center; max-width: 400px; padding: 40px 30px;">
+            <button class="modal-close" onclick="closePromoRewardModal()">&times;</button>
+            <div style="font-size: 3.5rem; color: #10b981; margin-bottom: 15px;"><i class="fa-solid fa-mug-hot"></i></div>
+            <h3 style="color: var(--text-dark); font-weight: bold; font-size: 1.35rem; margin-bottom: 10px;">شكراً لتقييمك! ☕</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 20px;">استخدم كود الخصم <strong>SAMA5</strong> أو <strong>SAMA10</strong> عند إتمام طلبك القادم للحصول على خصم فوري.</p>
+            <button class="btn" onclick="closePromoRewardModal()" style="width: 100%; padding: 12px;">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Policy and Privacy Modal -->
+    <div class="product-modal-overlay" id="policy-modal" onclick="closePolicyModal()">
+        <div class="product-modal-content" id="policy-modal-content" onclick="event.stopPropagation()" style="max-width: 550px; padding: 35px;">
+            <button class="modal-close" onclick="closePolicyModal()">&times;</button>
+            <h3 id="policy-modal-title" style="color: var(--text-dark); font-weight: 700; margin-bottom: 20px; font-size: 1.35rem; text-align: center; border-bottom: 1px solid rgba(41,151,216,0.15); padding-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;"></h3>
+            <div id="policy-modal-body" style="max-height: 400px; overflow-y: auto; padding-left: 5px;"></div>
+            <button class="btn" onclick="closePolicyModal()" style="width: 100%; margin-top: 25px; padding: 12px;">إغلاق النافذة</button>
+        </div>
+    </div>
+
+    <!-- 1. CUSTOMER AUTH MODAL -->
+    <div class="product-modal-overlay" id="customer-auth-modal" style="display: none; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); z-index: 9999999;" onclick="closeCustomerAuthModal()">
+        <div class="product-modal-content" onclick="event.stopPropagation()" style="max-width: 440px; width: 92%; padding: 36px 28px; text-align: center; border-radius: 24px; box-shadow: 0 30px 80px rgba(0,0,0,0.35); position: relative; border: 1px solid rgba(41,151,216,0.25);">
+            <button class="modal-close" onclick="closeCustomerAuthModal()" style="position: absolute; top: 16px; left: 16px; background: none; border: none; font-size: 1.4rem; color: #94a3b8; cursor: pointer;">&times;</button>
+            <div style="width: 70px; height: 70px; margin: 0 auto 16px; background: linear-gradient(135deg,#2997D8,#1D6FA5); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; box-shadow: 0 10px 25px rgba(41,151,216,0.35);">
+                <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <h3 id="auth-modal-title" style="font-size: 1.4rem; color: #0F2942; font-weight: 900; margin-bottom: 6px;">تسجيل الدخول برقم الجوال</h3>
+            <p id="auth-modal-desc" style="color: #6E5D53; font-size: 0.9rem; margin-bottom: 24px; line-height: 1.5;">لحفظ مشروباتك المفضلة ومتابعة حالة تحضير طلبك والفواتير</p>
+
+            <div id="auth-step-1">
+                <div style="text-align: right; margin-bottom: 16px;">
+                    <label style="font-weight: 700; font-size: 0.88rem; color: #334155; display: block; margin-bottom: 6px;">رقم الجوال *</label>
+                    <div style="position: relative;">
+                        <input type="tel" id="auth-phone-input" placeholder="05xxxxxxxx" pattern="05[0-9]{8}" maxlength="10" dir="ltr"
+                            style="width: 100%; padding: 13px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: 'Tajawal', sans-serif; font-size: 1.1rem; font-weight: 700; text-align: left;" required>
+                        <span style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 0.88rem; font-weight: 700;">🇸🇦 +966</span>
+                    </div>
+                </div>
+
+                <div style="text-align: right; margin-bottom: 22px;">
+                    <label style="font-weight: 700; font-size: 0.88rem; color: #334155; display: block; margin-bottom: 6px;">الاسم الكريم *</label>
+                    <input type="text" id="auth-name-input" placeholder="الاسم الأول والأخير"
+                        style="width: 100%; padding: 13px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600;" required>
+                </div>
+
+                <button type="button" onclick="handleCustomerLoginStep1()" class="btn" style="width: 100%; padding: 14px; background: linear-gradient(135deg,#2997D8,#1D6FA5); color: #fff; border: none; border-radius: 14px; font-weight: 800; font-size: 1.05rem; cursor: pointer;">
+                    متابعة وإرسال رمز التحقق <i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i>
+                </button>
+            </div>
+
+            <div id="auth-step-2" style="display: none;">
+                <p style="font-size: 0.9rem; color: #475569; margin-bottom: 16px;">
+                    تم إرسال رمز التحقق إلى الرقم <strong id="auth-display-phone" dir="ltr" style="color: var(--primary);"></strong>
+                </p>
+                <div style="margin-bottom: 20px;">
+                    <input type="text" id="auth-otp-input" placeholder="• • • •" maxlength="4" dir="ltr"
+                        style="width: 190px; padding: 12px; border: 2px solid var(--primary); border-radius: 14px; font-size: 1.8rem; letter-spacing: 12px; text-align: center; font-weight: 900; background: #fafaf9;">
+                </div>
+                <button type="button" onclick="handleCustomerLoginVerify()" class="btn" style="width: 100%; padding: 14px; background: linear-gradient(135deg,#10b981,#059669); color: #fff; border: none; border-radius: 14px; font-weight: 800; font-size: 1.05rem; cursor: pointer;">
+                    تأكيد الدخول ومتابعة الطلب <i class="fa-solid fa-check" style="margin-right: 6px;"></i>
+                </button>
+                <div style="margin-top: 14px; display: flex; justify-content: space-between; font-size: 0.85rem;">
+                    <button type="button" onclick="backToAuthStep1()" style="background: none; border: none; color: #64748b; font-weight: 700; cursor: pointer;">تغيير الرقم</button>
+                    <button type="button" onclick="resendCustomerOtp()" style="background: none; border: none; color: var(--primary); font-weight: 700; cursor: pointer;">إعادة إرسال الرمز</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. CUSTOMER ACCOUNT & PAST ORDERS MODAL -->
+    <div class="product-modal-overlay" id="customer-orders-modal" style="display: none; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); z-index: 9999999;" onclick="closeCustomerOrdersModal()">
+        <div class="product-modal-content" onclick="event.stopPropagation()" style="max-width: 640px; width: 94%; max-height: 88vh; display: flex; flex-direction: column; padding: 28px 24px; border-radius: 24px; box-shadow: 0 30px 80px rgba(0,0,0,0.35); position: relative; border: 1px solid rgba(41,151,216,0.25);">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 48px; height: 48px; background: linear-gradient(135deg,#2997D8,#1D6FA5); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.3rem;">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <div style="text-align: right;">
+                        <h3 id="my-account-name" style="margin: 0; font-size: 1.2rem; color: #0f172a; font-weight: 900;">حسابي</h3>
+                        <span id="my-account-phone" style="font-size: 0.85rem; color: #64748b;" dir="ltr"></span>
+                    </div>
+                </div>
+                <button onclick="closeCustomerOrdersModal()" style="background: none; border: none; font-size: 1.5rem; color: #94a3b8; cursor: pointer;">&times;</button>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 14px; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">
+                <button class="account-tab-btn active" id="tab-btn-orders" onclick="switchAccountTab('orders')" style="background: none; border: none; padding: 8px 16px; font-weight: 800; font-size: 0.95rem; color: var(--primary); border-bottom: 3px solid var(--primary); cursor: pointer; font-family: 'Tajawal', sans-serif;">
+                    <i class="fa-solid fa-receipt" style="margin-left: 6px;"></i> طلباتي وفواتيري (<span id="my-orders-count">0</span>)
+                </button>
+                <button class="account-tab-btn" id="tab-btn-profile" onclick="switchAccountTab('profile')" style="background: none; border: none; padding: 8px 16px; font-weight: 700; font-size: 0.95rem; color: #64748b; cursor: pointer; font-family: 'Tajawal', sans-serif;">
+                    <i class="fa-regular fa-address-card" style="margin-left: 6px;"></i> بياناتي وعنواني
+                </button>
+            </div>
+
+            <div id="account-tab-orders" style="overflow-y: auto; flex: 1; padding: 16px 0;">
+                <div id="customer-orders-list"></div>
+            </div>
+
+            <div id="account-tab-profile" style="display: none; overflow-y: auto; flex: 1; padding: 20px 4px; text-align: right;">
+                <div style="margin-bottom: 14px;">
+                    <label style="font-weight: 700; font-size: 0.88rem; color: #475569; display: block; margin-bottom: 6px;">الاسم الكامل</label>
+                    <input type="text" id="profile-edit-name" style="width: 100%; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-family: 'Tajawal', sans-serif;">
+                </div>
+                <div style="margin-bottom: 14px;">
+                    <label style="font-weight: 700; font-size: 0.88rem; color: #475569; display: block; margin-bottom: 6px;">المدينة</label>
+                    <input type="text" id="profile-edit-city" placeholder="الرياض" style="width: 100%; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-family: 'Tajawal', sans-serif;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="font-weight: 700; font-size: 0.88rem; color: #475569; display: block; margin-bottom: 6px;">العنوان المفضل / تفاصيل السيارة</label>
+                    <input type="text" id="profile-edit-address" placeholder="الحي، الشارع، أو نوع ورقم لوحة السيارة للاستلام السريع" style="width: 100%; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-family: 'Tajawal', sans-serif;">
+                </div>
+                <button type="button" onclick="saveCustomerProfileEdits()" class="btn" style="width: 100%; padding: 12px; background: linear-gradient(135deg,#2997D8,#1D6FA5); color: #fff; border: none; border-radius: 12px; font-weight: 800; cursor: pointer;">
+                    حفظ التعديلات
+                </button>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid #f1f5f9;">
+                <button onclick="handleCustomerLogout()" style="background: #fee2e2; color: #ef4444; border: none; padding: 9px 16px; border-radius: 10px; font-weight: 800; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج
+                </button>
+                <button onclick="closeCustomerOrdersModal()" class="btn" style="background: #f1f5f9; color: #475569; border: none; padding: 9px 20px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer;">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Logic Scripts -->
+    <script src="customer_email.js?v=1"></script>
+    <script src="customer_engine.js?v=1"></script>
+    <script src="app.js?v=15"></script>
+</body>
+</html>
+
